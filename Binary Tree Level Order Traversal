@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> v;
+        if(root==NULL)
+            return v;
+        vector<int> v1;
+        queue<TreeNode*> pendingnodes;
+        pendingnodes.push(root);
+        pendingnodes.push(NULL);
+        while(pendingnodes.size()!=0){
+           TreeNode* front= pendingnodes.front();
+            pendingnodes.pop();
+            if(front==NULL){
+               v.push_back(v1);
+                v1.resize(0);
+                if(pendingnodes.size()>0)
+                    pendingnodes.push(NULL);
+            }
+            else{
+                v1.push_back(front->val);
+                if(front->left)
+                    pendingnodes.push(front->left);
+                if(front->right)
+                  pendingnodes.push(front->right);  
+            }
+        }
+        return v;
+    }
+};
