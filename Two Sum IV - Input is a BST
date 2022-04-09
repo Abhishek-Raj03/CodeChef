@@ -1,0 +1,23 @@
+class Solution {
+public:
+    unordered_map<int,int> m;
+    int flag=0;
+    void fun(TreeNode* root, int k){
+        if(root==NULL)
+            return;
+       if(m.find(k-(root->val))!=m.end()){
+           flag=1;
+           return;
+       }
+        m[root->val]++;
+         fun(root->left,k);
+         fun(root->right,k);
+    }
+    
+    bool findTarget(TreeNode* root, int k) {
+        fun(root,k);
+        if(flag==0)
+            return false;
+        else return true;
+    }
+};
